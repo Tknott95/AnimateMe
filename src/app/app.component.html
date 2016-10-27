@@ -1,3 +1,6 @@
-<div [@signal]="'go'" class="traffic-light">
+<div [@signal]="signal" class="traffic-light">
   
 </div>
+<br>
+<button (click)="onGoClick()">Go</button>
+<button (click)="onStopClick()">Stop</button>

@@ -1,4 +1,4 @@
-import { Component, trigger, state, style } from '@angular/core';
+import { Component, trigger, state, style, transition, animate } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +7,22 @@ import { Component, trigger, state, style } from '@angular/core';
   animations: [
     trigger('signal', [
       state('go', style({
-        'background-color':'green'
-      }))
+        'background-color': 'green'
+      })),
+      state('stop', style({
+        'background-color': 'red'
+      })),
+      transition('* => *', animate(500))
     ])
   ]
 })
 export class AppComponent {
-  title = 'app works!';
+  signal = 'stop';
+
+  onGoClick(){
+    this.signal = 'go';
+  }
+  onStopClick(){
+    this.signal = 'stop';
+  }
 }
