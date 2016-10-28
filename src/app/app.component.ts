@@ -5,10 +5,24 @@ import { Component, keyframes, trigger, state, style, transition, animate } from
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   animations: [
+    trigger('flip', [
+      state('flippedState', style({
+        'background-color': 'yellow',
+        'transform-style': 'preserve-3d',
+        'transform': 'rotateX(-360deg )'
+      })),
+      state('normalState', style({
+        'background-color': 'red',
+        'transform-style': 'preserve-3d',
+        'transform': 'rotateX(360deg )'
+      })),
+      transition('normalState <=> flippedState', animate('1s 0s ease-in'))
+    ]),
     trigger('signal', [    // Take out void tranisiton if you dont want this
        state('void', style({
         'transform': 'translateY(-100%)',
-        'background-color': 'black'
+        'background-color': 'black',
+        'perspective': '800px'
       })),
       state('go', style({
         'background-color': 'green',
@@ -30,8 +44,12 @@ import { Component, keyframes, trigger, state, style, transition, animate } from
 export class AppComponent {
   signal: string;
   isHere = false;
+  flip: string = 'normalState';
+  font: string = '1';
+
+  
+
   onGoClick(){
-    
     this.signal = 'go';
   }
   onStopClick(){
@@ -39,5 +57,17 @@ export class AppComponent {
   }
   onToggleClick(){
     this.isHere = !this.isHere;
+  }
+
+  flipCard(){
+    if (this.flip == 'flippedState') {
+      this.flip = 'normalState'
+      this.font = 'sup'
+      
+    } else {
+      this.flip = 'flippedState'
+      this.font = 'hello'
+    }
+    console.log('hovered over, and flip state is: ' + this.flip + ' and font is: '+this.font);
   }
 }

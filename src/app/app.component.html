@@ -6,3 +6,9 @@
 <button (click)="onStopClick()">Stop</button>
 <hr>
 <button (click)="onToggleClick()">Toggle</button>
+
+
+<br><br><br>
+<div [@flip]="flip" class="flipIt" (mouseover)="flipCard(this.font)">
+    <h1>{{this.font}}</h1>
+</div>
